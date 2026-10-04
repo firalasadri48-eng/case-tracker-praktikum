@@ -1,0 +1,33 @@
+# Blueprint Render — deploy gratis Case Tracker Praktikum I
+# Cara pakai: push repo ini ke GitHub, lalu di dashboard Render pilih
+# "New +" -> "Blueprint" -> hubungkan repo ini.
+services:
+  - type: web
+    name: case-tracker
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: "Case Tracker Praktikum I"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        sync: false # isi manual: https://<nama-service>.onrender.com
+      - key: APP_KEY
+        sync: false # isi manual: hasil `php artisan key:generate --show` (diawali base64:)
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        sync: false # isi dari Neon/Supabase
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
